@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbocs6rbj2fks"]
+
+[ext_resource type="Script" path="res://test/main_menu.gd" id="1_w1fny"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1fny")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -408.0
+offset_right = 512.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -67.0
+offset_right = 249.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Slime, run!"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+text = "Играть"
+
+[node name="Quit" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Play")
+text = "Выйти"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

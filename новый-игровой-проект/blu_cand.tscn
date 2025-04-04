@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://wta54hlvx6op"]
+
+[ext_resource type="Texture2D" uid="uid://dp5lqcr1mwcbl" path="res://sprite/blue can.png" id="1_ko0up"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ajt4a"]
+radius = 211.038
+
+[node name="Blue_cand" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.52588e-05, -1.52588e-05)
+scale = Vector2(0.585938, 0.585938)
+texture = ExtResource("1_ko0up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(6, -17)
+shape = SubResource("CircleShape2D_ajt4a")

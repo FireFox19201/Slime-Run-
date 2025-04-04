@@ -1,0 +1,286 @@
+[gd_scene load_steps=22 format=4 uid="uid://cbs27yoahagi8"]
+
+[ext_resource type="PackedScene" uid="uid://cybbv8k2jbngb" path="res://Player.tscn" id="1_8gw6e"]
+[ext_resource type="PackedScene" uid="uid://cmiu4tdoymbgn" path="res://platf.tscn" id="1_nunm8"]
+[ext_resource type="Texture2D" uid="uid://chg5318tq3bov" path="res://sprite/blocks/1.png" id="8_g3qot"]
+[ext_resource type="Texture2D" uid="uid://by8bjkeb2sgrk" path="res://sprite/blocks/MyCollages.png" id="9_3e5vu"]
+[ext_resource type="Texture2D" uid="uid://bkd3tgfnoycqp" path="res://sprite/platform.png" id="9_x0eju"]
+[ext_resource type="Texture2D" uid="uid://bu3yu25xnt1qh" path="res://sprite/blocks/Untitled 01-12-2025 03-01-04.png" id="10_5c1w8"]
+[ext_resource type="Script" path="res://defet.gd" id="13_mndnj"]
+[ext_resource type="Script" path="res://pause.gd" id="14_t18re"]
+[ext_resource type="Script" path="res://victory.gd" id="15_76jjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jfuf"]
+size = Vector2(250.167, 376)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7t1t"]
+resource_name = "block"
+texture = ExtResource("8_g3qot")
+texture_region_size = Vector2i(750, 750)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-375, -375, 375, -375, 375, 375, -375, 375)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ekgyx"]
+texture = ExtResource("9_x0eju")
+texture_region_size = Vector2i(750, 750)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o6xim"]
+texture = ExtResource("10_5c1w8")
+texture_region_size = Vector2i(750, 750)
+0:0/0 = 0
+0:0/0/z_index = -1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uijrg"]
+resource_name = "water"
+texture = ExtResource("9_3e5vu")
+texture_region_size = Vector2i(750, 750)
+0:0/animation_frame_0/duration = 0.5
+0:0/animation_frame_1/duration = 0.5
+0:0/0 = 0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pu1rx"]
+tile_size = Vector2i(750, 750)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_i7t1t")
+sources/4 = SubResource("TileSetAtlasSource_uijrg")
+sources/2 = SubResource("TileSetAtlasSource_o6xim")
+sources/1 = SubResource("TileSetAtlasSource_ekgyx")
+
+[sub_resource type="Gradient" id="Gradient_v2gvn"]
+offsets = PackedFloat32Array(0.512987, 1)
+colors = PackedColorArray(0.32, 0.32, 0.32, 0.815686, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c8n30"]
+gradient = SubResource("Gradient_v2gvn")
+
+[sub_resource type="Gradient" id="Gradient_atar7"]
+colors = PackedColorArray(0.32, 0.32, 0.32, 0.796078, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bvmre"]
+gradient = SubResource("Gradient_atar7")
+width = 1
+
+[sub_resource type="Gradient" id="Gradient_pxd8l"]
+colors = PackedColorArray(0.32, 0.32, 0.32, 0.796078, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ymk5w"]
+gradient = SubResource("Gradient_pxd8l")
+width = 1
+
+[node name="testo" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2(-1125, -1876)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_4jfuf")
+
+[node name="Player" parent="." node_paths=PackedStringArray("defet", "victory", "pause") instance=ExtResource("1_8gw6e")]
+position = Vector2(-9637, 5007)
+defet = NodePath("../defet")
+victory = NodePath("../victory")
+pause = NodePath("../pause")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD5/wcAAAAAAAAAAAD4/wcAAAAAAAAAAAD3/wcAAAAAAAAAAAD2/wcAAAAAAAAAAAD1/wcAAAAAAAAAAAD6/wcAAAAAAAAAAAD7/wcAAAAAAAAAAAD8/wcAAAAAAAAAAAD+/wcAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAD9/wcAAAAAAAAAAAD0/wcAAAAAAAAAAADz/wcAAAAAAAAAAADy/wcAAAAAAAAAAADx/wcAAAAAAAAAAADx/wYAAAAAAAAAAADx/wUAAAAAAAAAAADx/wQAAAAAAAAAAADx/wMAAAAAAAAAAADx/wIAAAAAAAAAAADy/wIAAAAAAAAAAADy/wMAAAAAAAAAAADy/wQAAAAAAAAAAADy/wUAAAAAAAAAAADy/wYAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAOAAcAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAEAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAP//AAAAAAAAAAAOAP7/AAAAAAAAAAANAP7/AAAAAAAAAAANAP//AAAAAAAAAAANAP3/AAAAAAAAAAAOAP3/AAAAAAAAAAAOAPz/AAAAAAAAAAAOAPv/AAAAAAAAAAANAPv/AAAAAAAAAAANAPz/AAAAAAAAAAANAPr/AAAAAAAAAAAOAPr/AAAAAAAAAAAOAPn/AAAAAAAAAAANAPn/AAAAAAAAAAANAPj/AAAAAAAAAAAOAPj/AAAAAAAAAAAMAPj/AAAAAAAAAAALAPj/AAAAAAAAAAAKAPj/AAAAAAAAAADx//j/AAAAAAAAAADx//n/AAAAAAAAAADx//r/AAAAAAAAAADx//v/AAAAAAAAAADx//z/AAAAAAAAAADx//3/AAAAAAAAAADx//7/AAAAAAAAAADx////AAAAAAAAAADx/wAAAAAAAAAAAADy/wAAAAAAAAAAAADx/wEAAAAAAAAAAADy/wEAAAAAAAAAAADy////AAAAAAAAAADy//7/AAAAAAAAAADy//3/AAAAAAAAAADy//z/AAAAAAAAAADy//v/AAAAAAAAAADy//r/AAAAAAAAAADy//n/AAAAAAAAAADy//j/AAAAAAAAAADz//j/AAAAAAAAAAD0//j/AAAAAAAAAAD1//j/AAAAAAAAAAD2//j/AAAAAAAAAAD3//j/AAAAAAAAAAD4//j/AAAAAAAAAAD5//j/AAAAAAAAAAD6//j/AAAAAAAAAAD7//j/AAAAAAAAAAD8//j/AAAAAAAAAAD9//j/AAAAAAAAAAD+//j/AAAAAAAAAAD///j/AAAAAAAAAAAAAPj/AAAAAAAAAAABAPj/AAAAAAAAAAACAPj/AAAAAAAAAAADAPj/AAAAAAAAAAAEAPj/AAAAAAAAAAAFAPj/AAAAAAAAAAAGAPj/AAAAAAAAAAAHAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAJAPj/AAAAAAAAAAD//wcAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD+/wYAAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAALAAUAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAGAP7/AAAAAAAAAAADAP//AAAAAAAAAAACAP//AAAAAAAAAAABAP//AAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD8//7/AAAAAAAAAAD7//7/AAAAAAAAAAD6//7/AAAAAAAAAAD5//7/AAAAAAAAAAD5////AAAAAAAAAAD4////AAAAAAAAAAD3////AAAAAAAAAAD2////AAAAAAAAAAD1////AAAAAAAAAAD0////AAAAAAAAAADz////AAAAAAAAAADz//7/AAAAAAAAAAD0//7/AAAAAAAAAAD1//7/AAAAAAAAAAD2//7/AAAAAAAAAAD3//7/AAAAAAAAAAD4//7/AAAAAAAAAAD6////AAAAAAAAAAD7////AAAAAAAAAAD8////AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAADz//n/AAAAAAAAAADz//r/AAAAAAAAAADz//v/AAAAAAAAAADz//z/AAAAAAAAAADz//3/AAAAAAAAAAD0//3/AAAAAAAAAAD1//3/AAAAAAAAAAD1//z/AAAAAAAAAAD1//v/AAAAAAAAAAD0//v/AAAAAAAAAAD0//r/AAAAAAAAAAD0//n/AAAAAAAAAAD1//n/AAAAAAAAAAD1//r/AAAAAAAAAAD0//z/AAAAAAAAAAD2//3/AAAAAAAAAAD3//3/AAAAAAAAAAD3//z/AAAAAAAAAAD3//v/AAAAAAAAAAD2//r/AAAAAAAAAAD2//n/AAAAAAAAAAD3//n/AAAAAAAAAAD4//n/AAAAAAAAAAD4//r/AAAAAAAAAAD3//r/AAAAAAAAAAD2//v/AAAAAAAAAAD2//z/AAAAAAAAAAD4//z/AAAAAAAAAAD5//z/AAAAAAAAAAD4//3/AAAAAAAAAAD5//3/AAAAAAAAAAD6//3/AAAAAAAAAAD7//3/AAAAAAAAAAD7//z/AAAAAAAAAAD6//z/AAAAAAAAAAD5//v/AAAAAAAAAAD4//v/AAAAAAAAAAD5//r/AAAAAAAAAAD5//n/AAAAAAAAAAD6//n/AAAAAAAAAAD7//n/AAAAAAAAAAD7//r/AAAAAAAAAAD6//r/AAAAAAAAAAD6//v/AAAAAAAAAAD7//v/AAAAAAAAAAAIAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAKAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAEAAAAAAAAAAAALAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAGAAIAAAAAAAAAAAAKAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_pu1rx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.09, 0.09)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD+//3/AgAAAAAAAAA=")
+tile_set = SubResource("TileSet_pu1rx")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("1_nunm8")]
+position = Vector2(8250, -1100)
+scale = Vector2(4, 1)
+
+[node name="defet" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10667.0
+offset_top = -6000.0
+offset_right = 10668.0
+offset_bottom = 6000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_mndnj")
+
+[node name="TextureRect" type="TextureRect" parent="defet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -408.0
+offset_right = 512.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_c8n30")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="defet"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2582.5
+offset_top = -1614.0
+offset_right = -2057.5
+offset_bottom = -1323.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+
+[node name="Title" type="Label" parent="defet/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Поражение"
+horizontal_alignment = 1
+
+[node name="1 lv" type="Button" parent="defet/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+text = "Заново"
+
+[node name="back" type="Button" parent="defet/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "В меню"
+
+[node name="pause" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10667.0
+offset_top = -6000.0
+offset_right = 10668.0
+offset_bottom = 6000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_t18re")
+
+[node name="TextureRect" type="TextureRect" parent="pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -408.0
+offset_right = 512.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_bvmre")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2582.5
+offset_top = -1614.0
+offset_right = -2057.5
+offset_bottom = -1323.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+
+[node name="Title" type="Label" parent="pause/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Пауза"
+horizontal_alignment = 1
+
+[node name="1 lv" type="Button" parent="pause/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+text = "Продолжить"
+
+[node name="back" type="Button" parent="pause/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "В меню"
+
+[node name="victory" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10667.0
+offset_top = -6000.0
+offset_right = 10668.0
+offset_bottom = 6000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_76jjc")
+
+[node name="TextureRect" type="TextureRect" parent="victory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -712.0
+offset_top = -408.0
+offset_right = 312.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_ymk5w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="victory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5212.5
+offset_top = -1614.0
+offset_right = -4157.5
+offset_bottom = -1323.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+
+[node name="Title" type="Label" parent="victory/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Уровень пройден"
+horizontal_alignment = 1
+
+[node name="1 lv" type="Button" parent="victory/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+text = "Следуйщий"
+
+[node name="back" type="Button" parent="victory/VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "В меню"
+
+[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="pressed" from="defet/VBoxContainer/1 lv" to="defet" method="_on_1_lv_pressed"]
+[connection signal="pressed" from="defet/VBoxContainer/back" to="defet" method="_on_back_pressed"]
+[connection signal="pressed" from="pause/VBoxContainer/1 lv" to="pause" method="_on_1_lv_pressed"]
+[connection signal="pressed" from="pause/VBoxContainer/back" to="pause" method="_on_back_pressed"]
+[connection signal="pressed" from="victory/VBoxContainer/1 lv" to="victory" method="_on_1_lv_pressed"]
+[connection signal="pressed" from="victory/VBoxContainer/back" to="victory" method="_on_back_pressed"]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2fweotr0q4e0"]
+
+[ext_resource type="Script" path="res://levels.gd" id="1_4evaf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4evaf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -408.0
+offset_right = 512.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -145.5
+offset_right = 148.0
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Slime, run!"
+horizontal_alignment = 1
+
+[node name="1 lv" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_top = NodePath("../2 lv")
+text = "1"
+
+[node name="2 lv" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "2"
+
+[node name="3 lv" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "3"
+
+[node name="4 lv" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "4"
+
+[node name="5 lv" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "5"
+
+[node name="back" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "Назад"
+
+[connection signal="pressed" from="VBoxContainer/1 lv" to="." method="_on_1_lv_pressed"]
+[connection signal="pressed" from="VBoxContainer/2 lv" to="." method="_on_2_lv_pressed"]
+[connection signal="pressed" from="VBoxContainer/3 lv" to="." method="_on_3_lv_pressed"]
+[connection signal="pressed" from="VBoxContainer/4 lv" to="." method="_on_4_lv_pressed"]
+[connection signal="pressed" from="VBoxContainer/5 lv" to="." method="_on_5_lv_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

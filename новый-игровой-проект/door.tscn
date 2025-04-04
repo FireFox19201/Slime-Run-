@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://djhb6rkpj4wwv"]
+
+[ext_resource type="Texture2D" uid="uid://b57owwa827gv6" path="res://sprite/button2.png" id="1_a71v5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nrqb"]
+size = Vector2(122, 750)
+
+[node name="door" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1, 2)
+texture = ExtResource("1_a71v5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-11, 0)
+shape = SubResource("RectangleShape2D_1nrqb")

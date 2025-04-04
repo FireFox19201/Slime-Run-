@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdcedmwp1tmcw"]
+
+[ext_resource type="Script" path="res://chapters.gd" id="1_viiju"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_viiju")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -408.0
+offset_right = 512.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -145.5
+offset_right = 148.0
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 90
+text = "Slime, run!"
+horizontal_alignment = 1
+
+[node name="1 ch" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_top = NodePath("../2 ch")
+text = "1 глава"
+
+[node name="2 ch" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 ch")
+disabled = true
+text = "2 глава"
+
+[node name="3 ch" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 ch")
+disabled = true
+text = "3 глава"
+
+[node name="back" type="Button" parent="VBoxContainer" groups=["Button"]]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../1 lv")
+text = "Назад"
+
+[connection signal="pressed" from="VBoxContainer/1 ch" to="." method="_on_1_ch_pressed"]
+[connection signal="pressed" from="VBoxContainer/2 ch" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/3 ch" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

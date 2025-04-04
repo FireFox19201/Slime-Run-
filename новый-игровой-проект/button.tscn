@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvbaca5axd78s"]
+
+[ext_resource type="Script" path="res://button.gd" id="1_077n5"]
+[ext_resource type="Texture2D" uid="uid://b57owwa827gv6" path="res://sprite/button2.png" id="2_4qwbr"]
+[ext_resource type="Texture2D" uid="uid://b84rpmyfnvyjl" path="res://sprite/button.png" id="3_d08xx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5w88"]
+size = Vector2(750, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gq7u"]
+size = Vector2(751, 130.5)
+
+[node name="Button" type="StaticBody2D"]
+script = ExtResource("1_077n5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4qwbr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-1, -60)
+scale = Vector2(0.897333, 0.976)
+texture = ExtResource("3_d08xx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 12.5)
+shape = SubResource("RectangleShape2D_h5w88")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(1, -28.75)
+shape = SubResource("RectangleShape2D_1gq7u")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
